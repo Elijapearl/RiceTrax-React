@@ -1,0 +1,246 @@
+.inventory-main {
+  margin-left: 250px;
+  padding: 2rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.inventory-main h1{
+    font-weight: 600;
+    font-size: 2.5rem;
+    color: #2e7d32;
+    letter-spacing: -0.5px;
+}
+.inventory-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.inventory-header-controls {
+  display: flex;
+  align-items: center;
+}
+
+.inventory-btn-add {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.inventory-btn-add:hover {
+  background-color: #388e3c;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.inventory-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.inventory-brand-card {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 10px solid transparent;
+  transition: transform 0.2s ease;
+}
+
+.inventory-brand-card:hover {
+  transform: scale(1.02);
+}
+
+.inventory-brand-info h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.inventory-brand-info p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.inventory-brand-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.btn-edit:hover {
+  background-color: #e3f2fd;
+}
+
+.btn-delete:hover {
+  background-color: #ffebee;
+}
+
+/* Modals and Status Colors remain unchanged */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal h2 {
+  margin-bottom: 1rem;
+}
+
+.modal label {
+  display: block;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.modal input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn-cancel,
+.btn-save,
+.btn-delete {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cancel {
+  background-color: #e0e0e0;
+}
+
+.btn-save {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-delete {
+  background-color: #3ab354;
+  color: white;
+}
+
+/* Status Colors */ 
+.in-stock1 {
+  border-left: 10px solid #2e7d32;
+}
+.low-stock1 {
+  border-left: 10px solid #fbc02d;
+}
+.out-of-stock {
+  border-left: 10px solid #d32f2f;
+}
+
+/* Legend */
+.inventory-legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  color: #444;
+  flex-wrap: wrap;
+}
+
+.dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.in-stock-dot {
+  background: #2e7d32;
+}
+.low-stock-dot {
+  background: #fbc02d;
+}
+.out-of-stock-dot {
+  background: #d32f2f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .inventory-main {
+    margin-left: 0;
+    margin-top: 80px;
+    padding: 1rem;
+  }
+
+  .inventory-header {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 30px;
+  }
+
+  .inventory-brand-info h2 {
+    font-size: 1.25rem;
+  }
+
+  .inventory-brand-info p {
+    font-size: 1rem;
+  }
+
+  .inventory-brand-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
