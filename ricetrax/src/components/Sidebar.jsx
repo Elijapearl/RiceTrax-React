@@ -1,41 +1,57 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Home, Layers, ShoppingCart, Bell, Settings, LogOut } from 'lucide-react';
-import '../styles/sidebar.css';
+import React, { useState } from "react";
+import {
+  FaChartBar,
+  FaBoxes,
+  FaDollarSign,
+  FaExclamationTriangle,
+  FaBars,
+  FaTimes,
+} from "react-icons/fa";
+import "../styles/sidebar.css";
+import Logo from '../assets/Logo.png'
 
 const Sidebar = () => {
-  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const navItems = [
-    { label: 'Dashboard', icon: <Home size={20} />, path: '/dashboard' },
-    { label: 'Inventory', icon: <Layers size={20} />, path: '/inventory' },
-    { label: 'POS', icon: <ShoppingCart size={20} />, path: '/pos' },
-    { label: 'Notification', icon: <Bell size={20} />, path: '/notifications' },
-    { label: 'Settings', icon: <Settings size={20} />, path: '/settings' },
-  ];
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (
-    <aside className="rtx-sidebar">
-      <div className="rtx-sidebar-top">
-        <img src="/logo.png" alt="RiceTrax" className="rtx-logo" />
-        <h2 className="rtx-brand">RiceTrax</h2>
-        <nav className="rtx-nav">
-          {navItems.map(({ label, icon, path }) => (
-            <Link
-              key={path}
-              to={path}
-              className={`rtx-nav-item ${location.pathname === path ? 'rtx-active' : ''}`}
-            >
-              {icon}
-              <span>{label}</span>
-            </Link>
-          ))}
-        </nav>
+    <aside className="sidebar">
+      <div className="sidebar-logo">
+        <img src={Logo} alt="RiceTrax Logo" className="logo-img" />
+        <span className="logo-text">RiceTrax</span>
       </div>
-      <button className="rtx-logout">
-        <LogOut size={20} />
-        <span>Log out</span>
+
+      <button className="hamburger" onClick={toggleMenu}>
+        {menuOpen ? <FaTimes /> : <FaBars />}
       </button>
+
+      <ul className={`sidebar-nav ${menuOpen ? "open" : ""}`}>
+        <li>
+          <a href="/dashboard">
+            <FaChartBar className="icon" />
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a href="/inventory">
+            <FaBoxes className="icon" />
+            Inventory
+          </a>
+        </li>
+        <li>
+          <a href="/sales">
+            <FaDollarSign className="icon" />
+            Sales
+          </a>
+        </li>
+        <li>
+          <a href="/alerts">
+            <FaExclamationTriangle className="icon" />
+            Alerts
+          </a>
+        </li>
+      </ul>
     </aside>
   );
 };

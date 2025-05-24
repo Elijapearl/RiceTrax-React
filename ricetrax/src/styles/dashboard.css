@@ -1,0 +1,292 @@
+.dashboard-content {
+  padding: 2rem 2.5rem;
+  background: #f4f6f9;
+  min-height: 100vh;
+  margin-left: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar padding offset */
+@media (min-width: 769px) {
+  .dashboard-content {
+    padding-left: 270px;
+  }
+}
+
+.dashboard-content h1 {
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: #2e7d32;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+/* Cards Layout */
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(34, 87, 41, 0.08);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(34, 87, 41, 0.15);
+}
+
+.card-icon {
+  width: 42px;
+  height: 42px;
+  background: #2e7d32;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.card-text h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.card-text p {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2e7d32;
+}
+
+/* Charts Section */
+.dashboard-charts {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.chart {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(34, 87, 41, 0.07);
+  padding: 2rem;
+  flex: 1 1 460px;
+  min-width: 300px;
+}
+
+.chart h3 {
+  font-weight: 600;
+  color: #2e7d32;
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+}
+
+/* Table Section */
+.dashboard-table {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 6px 16px rgba(34, 87, 41, 0.07);
+}
+
+.dashboard-table h3 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2e7d32;
+  font-size: 1.1rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+thead th {
+  border-bottom: 2px solid #c8e6c9;
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+tbody td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.in-stock {
+  color: #2e7d32;
+  font-weight: 600;
+}
+
+.low-stock {
+  color: #f9a825;
+  font-weight: 600;
+}
+
+.out-stock {
+  color: #d32f2f;
+  font-weight: 600;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .dashboard-content {
+    padding: 1.2rem;
+    padding-top: 70px;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chart {
+    padding: 1.5rem;
+  }
+
+  .dashboard-table {
+    padding: 1.5rem;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr {
+    margin-bottom: 1rem;
+    background: #f1f8f2;
+    border-radius: 10px;
+    padding: 1rem;
+  }
+
+  tbody td {
+    text-align: center;
+    border: none;
+  }
+
+  tbody td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: 600;
+    color: #2e7d32;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+
+  
+
+}
+
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sales-record-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.sales-record-btn:hover {
+  background-color: #388e3c;
+}
+
+/* Modal Styles */
+.modal {
+  background: white;
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 800px;
+  margin: 70px auto;
+  border-radius: 10px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.download-btn {
+  background-color: #2e7d32;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.sales-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.sales-table th,
+.sales-table td {
+  border: 1px solid #ccc;
+  padding: 0.6rem;
+  text-align: left;
+}
