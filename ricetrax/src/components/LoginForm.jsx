@@ -9,7 +9,7 @@ const LoginForm = () => {
       <img src={logo} alt="RiceTrax Logo" className="auth-logo" />
       <h2 className="auth-title">Login to RiceTrax</h2>
       <form>
-        <input type="text" placeholder="Username" className="auth-input" />
+        <input type="email" placeholder="Email" className="auth-input" />
         <input type="password" placeholder="Password" className="auth-input" />
         <Link to="/forgot-password" className="auth-link">Forgot Password?</Link>
         <button type="submit" className="auth-button">Login</button>
