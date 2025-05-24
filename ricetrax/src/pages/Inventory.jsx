@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Edit2, Trash2 } from "lucide-react";
-import Sidebar from "../components/Sidebar"; 
-import DateTime from "../components/DateTimeDisplay"; 
+import { Plus, Edit2, Trash2, Warehouse } from "lucide-react";
+import Sidebar from "../components/Sidebar";
+import DateTime from "../components/DateTimeDisplay";
 import "../styles/inventory.css";
 
 const initialBrands = [
@@ -14,7 +14,7 @@ const initialBrands = [
   { id: 6, name: "Brown Rice", stock: "25 sacks" },
   { id: 7, name: "Red Rice", stock: "15 sacks" },
   { id: 8, name: "Glutinous", stock: "10 sacks" },
-  { id: 9, name: "Extra Brand", stock: "5 sacks" }, 
+  { id: 9, name: "Extra Brand", stock: "5 sacks" },
 ];
 
 export default function Inventory() {
@@ -67,11 +67,11 @@ export default function Inventory() {
     setDeleteConfirmOpen(false);
   };
 
-  const getStockLevel = (stock) => {
+  const getStatus = (stock) => {
     const qty = parseInt(stock);
-    if (qty <= 10) return "out-of-stock";
-    if (qty <= 25) return "low-stock1";
-    return "in-stock1";
+    if (qty <= 10) return "Out of Stock";
+    if (qty <= 25) return "Low Stock";
+    return "In Stock";
   };
 
   return (
@@ -85,34 +85,30 @@ export default function Inventory() {
           </div>
         </header>
 
-        <div className="inventory-legend">
-          <span><span className="dot in-stock-dot" /> In Stock</span>
-          <span><span className="dot low-stock-dot" /> Low Stock</span>
-          <span><span className="dot out-of-stock-dot" /> Out of Stock</span>
-        </div>
-
         <button className="inventory-btn-add" onClick={openAddModal}>
           <Plus className="icon" /> Add Brand
         </button>
 
-        <section className="inventory-brand-grid">
+        <section className="inventory-tile-grid">
           {brands.map((brand) => (
             <div
               key={brand.id}
-              className={`inventory-brand-card ${getStockLevel(brand.stock)}`}
+              className="inventory-tile"
               onClick={() => navigate(`/inventory/${brand.id}`)}
             >
-              <div className="inventory-brand-info">
-                <h2>{brand.name}</h2>
-                <p>Stock: {brand.stock}</p>
+              <div className="tile-icon">
+                <Warehouse size={32} />
               </div>
-              <div className="inventory-brand-actions">
-                <button className="btn btn-edit" onClick={(e) => openEditModal(brand, e)}>
-                  <Edit2 className="icon" />
-                </button>
-                <button className="btn btn-delete" onClick={(e) => openDeleteConfirm(brand, e)}>
-                  <Trash2 className="icon" />
-                </button>
+              <div className="tile-info">
+                <h3>{brand.name}</h3>
+                <p>{brand.stock}</p>
+                <span className={`status-badge ${getStatus(brand.stock).toLowerCase().replace(/\s/g, "-")}`}>
+                  {getStatus(brand.stock)}
+                </span>
+              </div>
+              <div className="tile-actions">
+                <button onClick={(e) => openEditModal(brand, e)}><Edit2 size={18} /></button>
+                <button onClick={(e) => openDeleteConfirm(brand, e)}><Trash2 size={18} /></button>
               </div>
             </div>
           ))}

@@ -154,7 +154,7 @@ tbody td {
 @media (max-width: 768px) {
   .dashboard-content {
     padding: 1.2rem;
-    margin-top: 80px;
+    margin-top: 60px;
   }
 
   .dashboard-cards {

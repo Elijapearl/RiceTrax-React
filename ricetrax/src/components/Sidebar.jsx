@@ -6,6 +6,7 @@ import {
   FaExclamationTriangle,
   FaBars,
   FaTimes,
+  FaCog
 } from "react-icons/fa";
 import "../styles/sidebar.css";
 import Logo from '../assets/Logo.png'
@@ -48,9 +49,15 @@ const Sidebar = () => {
         <li>
           <a href="/alerts">
             <FaExclamationTriangle className="icon" />
-            Alerts
+            Notifications
           </a>
         </li>
+        <li>
+  <a href="/settings">
+    <FaCog className="icon" />
+    Settings
+  </a>
+</li>
       </ul>
     </aside>
   );

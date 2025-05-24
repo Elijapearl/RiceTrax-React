@@ -2,119 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import DateTime from "../components/DateTimeDisplay";
-import { Line } from "react-chartjs-2";
+import { Line, Bar } from "react-chartjs-2";
 import "chart.js/auto";
 import "../styles/branddetails.css";
+import mockBrandData from "../data/mockBrandData";
 
-const mockBrandData = {
-  1: {
-    name: "Dinorado",
-    totalStock: 150,
-    soldStock: 90,
-    pricePerSack: 1800,
-    transactions: [
-      { id: "T001", date: "2025-05-01", quantity: 20, price: 45 },
-      { id: "T002", date: "2025-05-03", quantity: 15, price: 45 },
-      { id: "T003", date: "2025-05-10", quantity: 5, price: 45 },
-      { id: "T050", date: "2025-05-15", quantity: 30, price: 45 },
-      { id: "T051", date: "2025-05-20", quantity: 20, price: 45 },
-    ],
-  },
-  2: {
-    name: "Sinandomeng",
-    totalStock: 120,
-    soldStock: 70,
-    pricePerSack: 1700,
-    transactions: [
-      { id: "T004", date: "2025-05-02", quantity: 10, price: 42 },
-      { id: "T005", date: "2025-05-07", quantity: 10, price: 42 },
-      { id: "T006", date: "2025-05-11", quantity: 10, price: 42 },
-      { id: "T052", date: "2025-05-13", quantity: 20, price: 42 },
-      { id: "T053", date: "2025-05-17", quantity: 20, price: 42 },
-    ],
-  },
-  3: {
-    name: "Jasmine",
-    totalStock: 90,
-    soldStock: 50,
-    pricePerSack: 1650,
-    transactions: [
-      { id: "T007", date: "2025-04-25", quantity: 15, price: 40 },
-      { id: "T008", date: "2025-05-10", quantity: 5, price: 40 },
-      { id: "T054", date: "2025-05-12", quantity: 10, price: 40 },
-      { id: "T055", date: "2025-05-15", quantity: 10, price: 40 },
-      { id: "T056", date: "2025-05-18", quantity: 10, price: 40 },
-    ],
-  },
-  4: {
-    name: "Well-Milled",
-    totalStock: 110,
-    soldStock: 65,
-    pricePerSack: 1550,
-    transactions: [
-      { id: "T009", date: "2025-04-30", quantity: 25, price: 38 },
-      { id: "T010", date: "2025-05-05", quantity: 20, price: 38 },
-      { id: "T057", date: "2025-05-08", quantity: 10, price: 38 },
-      { id: "T058", date: "2025-05-14", quantity: 10, price: 38 },
-    ],
-  },
-  5: {
-    name: "Premium",
-    totalStock: 140,
-    soldStock: 100,
-    pricePerSack: 1850,
-    transactions: [
-      { id: "T011", date: "2025-05-01", quantity: 30, price: 48 },
-      { id: "T012", date: "2025-05-09", quantity: 30, price: 48 },
-      { id: "T059", date: "2025-05-15", quantity: 20, price: 48 },
-      { id: "T060", date: "2025-05-20", quantity: 20, price: 48 },
-    ],
-  },
-  6: {
-    name: "Brown Rice",
-    totalStock: 75,
-    soldStock: 40,
-    pricePerSack: 1750,
-    transactions: [
-      { id: "T013", date: "2025-04-20", quantity: 15, price: 43 },
-      { id: "T014", date: "2025-05-03", quantity: 10, price: 43 },
-      { id: "T061", date: "2025-05-10", quantity: 5, price: 43 },
-      { id: "T062", date: "2025-05-16", quantity: 10, price: 43 },
-    ],
-  },
-  7: {
-    name: "Red Rice",
-    totalStock: 55,
-    soldStock: 30,
-    pricePerSack: 1700,
-    transactions: [
-      { id: "T015", date: "2025-05-08", quantity: 15, price: 44 },
-      { id: "T063", date: "2025-05-12", quantity: 10, price: 44 },
-      { id: "T064", date: "2025-05-18", quantity: 5, price: 44 },
-    ],
-  },
-  8: {
-    name: "Glutinous",
-    totalStock: 40,
-    soldStock: 20,
-    pricePerSack: 1900,
-    transactions: [
-      { id: "T016", date: "2025-04-27", quantity: 10, price: 50 },
-      { id: "T065", date: "2025-05-10", quantity: 10, price: 50 },
-    ],
-  },
-  9: {
-    name: "Extra Brand",
-    totalStock: 25,
-    soldStock: 15,
-    pricePerSack: 1500,
-    transactions: [
-      { id: "T017", date: "2025-05-12", quantity: 5, price: 35 },
-      { id: "T066", date: "2025-05-14", quantity: 5, price: 35 },
-      { id: "T067", date: "2025-05-16", quantity: 5, price: 35 },
-    ],
-  },
-};
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
 const MONTH_MS = 30 * 24 * 60 * 60 * 1000;
 
 const MONTH_NAMES = [
@@ -132,7 +27,6 @@ const MONTH_NAMES = [
   { value: "12", label: "December" },
 ];
 
-// Generate a range of years including past 5 years, current year, and next 2 years
 function generateYearOptions() {
   const currentYear = new Date().getFullYear();
   const years = [];
@@ -197,42 +91,85 @@ export default function BrandDetails() {
         label: "Sales (kg)",
         data: sortedChartTxns.map((txn) => txn.quantity),
         fill: false,
-        borderColor: "#4caf50",
+        borderColor: "#388e3c",
         tension: 0.3,
+        pointRadius: 3,
+      },
+    ],
+  };
+
+  const revenueData = {
+    labels: sortedChartTxns.map((txn) => txn.date),
+    datasets: [
+      {
+        label: "Revenue (₱)",
+        data: sortedChartTxns.map((txn) => txn.quantity * txn.price),
+        backgroundColor: "#81c784",
       },
     ],
   };
 
   if (!brand) return <p>Loading brand details...</p>;
 
-  // Use dynamic years options instead of only those from data
   const years = generateYearOptions();
+
+  function exportToExcel() {
+    if (filteredTransactions.length === 0) {
+      alert("No transactions to export!");
+      return;
+    }
+
+    // Prepare data for worksheet
+    const wsData = filteredTransactions.map((txn) => ({
+      "Transaction ID": txn.id,
+      Date: txn.date,
+      Quantity: txn.quantity,
+      "Unit Price (₱)": txn.price,
+      "Total Price (₱)": (txn.quantity * txn.price).toFixed(2),
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(wsData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Transactions");
+
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    const data = new Blob([excelBuffer], {
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+    });
+
+    saveAs(data, `${brand.name}_transactions.xlsx`);
+  }
 
   return (
     <div className="branddetails-container">
       <Sidebar />
       <main className="branddetails-main">
         <DateTime />
-        <div className="branddetails-header">
+        <header className="branddetails-header">
           <h1>{brand.name} Details</h1>
-        </div>
+        </header>
 
-        <div className="branddetails-stats">
-          <div className="card green">
+        <section className="branddetails-stats">
+          <div className="card stat-card green">
             <h3>Total Stock</h3>
             <p>{brand.totalStock} sacks</p>
           </div>
-          <div className="card yellow">
+          <div className="card stat-card yellow">
             <h3>Sold Stock</h3>
             <p>{brand.soldStock} sacks</p>
           </div>
-          <div className="card blue">
+          <div className="card stat-card blue">
             <h3>Price/Sack</h3>
             <p>₱{brand.pricePerSack}</p>
           </div>
-        </div>
+        </section>
 
-        <div className="branddetails-filters">
+        <section className="branddetails-filters">
           <div className="filter-group">
             <label htmlFor="yearFilter">Year</label>
             <select
@@ -268,8 +205,16 @@ export default function BrandDetails() {
               ))}
             </select>
           </div>
+        </section>
+
+        {/* Download Excel Button */}
+        <div className="excel-export-container">
+          <button className="btn-excel" onClick={exportToExcel}>
+            Download Excel
+          </button>
         </div>
 
+        {/* Desktop Table */}
         <table className="branddetails-table">
           <thead>
             <tr>
@@ -288,7 +233,7 @@ export default function BrandDetails() {
                   <td>{txn.date}</td>
                   <td>{txn.quantity}</td>
                   <td>{txn.price}</td>
-                  <td>{txn.quantity * txn.price}</td>
+                  <td>{(txn.quantity * txn.price).toFixed(2)}</td>
                 </tr>
               ))
             ) : (
@@ -301,21 +246,58 @@ export default function BrandDetails() {
           </tbody>
         </table>
 
-        <div className="branddetails-graph">
-          <h3>Sales Trend</h3>
+        {/* Mobile Cards */}
+        <div className="branddetails-cardlist">
+          {filteredTransactions.length > 0 ? (
+            filteredTransactions.map((txn) => (
+              <div key={txn.id} className="txn-card">
+                <p>
+                  <strong>Transaction ID:</strong> {txn.id}
+                </p>
+                <p>
+                  <strong>Date:</strong> {txn.date}
+                </p>
+                <p>
+                  <strong>Quantity:</strong> {txn.quantity} kg
+                </p>
+                <p>
+                  <strong>Unit Price:</strong> ₱{txn.price}
+                </p>
+                <p>
+                  <strong>Total:</strong> ₱{(txn.quantity * txn.price).toFixed(2)}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p style={{ textAlign: "center" }}>No transactions found</p>
+          )}
+        </div>
+
+        <section className="branddetails-graph">
+          <h3>Sales & Revenue Trend</h3>
           <div className="chart-filter">
             <label>Show last:</label>
             <select
               value={chartMonths}
               onChange={(e) => setChartMonths(Number(e.target.value))}
             >
-              <option value={3}>3 months</option>
-              <option value={6}>6 months</option>
-              <option value={12}>12 months</option>
+              {[1, 3, 6, 12].map((m) => (
+                <option key={m} value={m}>
+                  {m} month{m > 1 ? "s" : ""}
+                </option>
+              ))}
             </select>
           </div>
-          <Line data={salesData} />
-        </div>
+
+          <div className="chart-row">
+            <div className="chart-box">
+              <Line data={salesData} />
+            </div>
+            <div className="chart-box">
+              <Bar data={revenueData} />
+            </div>
+          </div>
+        </section>
       </main>
     </div>
   );
