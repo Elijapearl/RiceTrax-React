@@ -1,0 +1,180 @@
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Root page layout */
+.notifications-page {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #6d1818;
+  flex-direction: column; /* default stacked for small */
+  margin: 0;
+  padding: 0;
+}
+
+/* Sidebar styling is controlled inside Sidebar component itself */
+/* Just reserve fixed width on desktop */
+@media (min-width: 768px) {
+  .notifications-page {
+    flex-direction: row;
+  }
+
+  /* Sidebar should have fixed width; ensure it does not collapse */
+  .notifications-page > *:first-child {
+    flex-shrink: 0;
+    width: 250px; /* match your sidebar width */
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+    overflow-y: auto;
+  }
+}
+
+/* Main content container */
+.notifications-container {
+  flex-grow: 1;
+  padding: 1.5rem 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 3rem;
+}
+
+
+.notifications-container > * {
+  margin-bottom: 1rem;
+}
+
+.notif-header2 {
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #222;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #059e12;
+  padding-bottom: 0.25rem;
+}
+
+/* Notifications list styling */
+.notifications-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Notification item */
+.notification {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  background-color: white;
+  cursor: default;
+}
+
+.notification:hover {
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  transform: translateY(-2px);
+}
+
+/* Transparent yellow for low stock */
+.low-stock {
+  background-color: rgba(255, 255, 0, 0.2);
+  color: #666600;
+}
+
+/* Transparent red for out of stock */
+.out-of-stock {
+  background-color: rgba(255, 0, 0, 0.15);
+  color: #a30000;
+}
+
+/* Notification text */
+.notification-info {
+  font-weight: 600;
+  flex: 1;
+  word-break: break-word;
+}
+
+.notification-timestamp {
+  font-size: 0.85rem;
+  color: #555;
+  white-space: nowrap;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+/* No notifications message */
+.no-notifications {
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 767px) {
+  /* Sidebar stacked above content */
+  .notifications-page {
+    flex-direction: column;
+  }
+
+  .notifications-page > *:first-child {
+    width: 100% !important;
+    min-height: auto;
+    position: relative;
+  }
+
+  .notifications-container {
+    padding: 1rem 1rem 2rem;
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  /* Notifications vertical stacking */
+  .notification {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notification-timestamp {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    white-space: normal;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .notification {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .notification-info {
+    font-weight: 600;
+  }
+
+  .notification-timestamp {
+    font-size: 0.8rem;
+  }
+}
