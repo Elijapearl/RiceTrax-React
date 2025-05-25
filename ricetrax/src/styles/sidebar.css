@@ -150,3 +150,45 @@ body {
     border-bottom: none;
   }
 }
+
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: #e6f4ea;
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  width: 100%;
+  text-align: left;
+}
+
+.logout-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #c8e6c9;
+}
+
+.desktop-logout {
+  margin-top: auto;
+}
+
+.mobile-logout {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-logout {
+    display: none;
+  }
+
+  .mobile-logout {
+    display: block;
+    width: 100%;
+  }
+}
