@@ -140,7 +140,7 @@ tbody td {
   font-weight: 600;
 }
 
-.low-stock {
+.low-stock1 {
   color: #f9a825;
   font-weight: 600;
 }
@@ -233,7 +233,7 @@ tbody td {
 }
 
 /* Modal Styles */
-.modal {
+.modal1 {
   background: white;
   padding: 1.5rem;
   width: 90%;
