@@ -212,7 +212,7 @@ const Dashboard = () => {
                   <td>Angelica</td>
                   <td>150</td>
                   <td>₱ 550</td>
-                  <td className="low-stock">Low Stock</td>
+                  <td className="low-stock1">Low Stock</td>
                 </tr>
                 <tr>
                   <td>Maharlika</td>
@@ -236,7 +236,7 @@ const Dashboard = () => {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         contentLabel="Sales Records"
-        className="modal"
+        className="modal1"
         overlayClassName="overlay"
       >
         <div className="modal-header">
