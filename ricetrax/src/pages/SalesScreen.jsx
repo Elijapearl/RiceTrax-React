@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import DateTimeDisplay from "../components/DateTimeDisplay";
 import "../styles/salesScreen.css";
 import { generateReceiptHTML } from "../utils/ReceiptWindow";
-import Logo from "../assets/logo.png"; 
+import Logo from "../assets/Logo.png"; 
 
 const products = [
   { id: 1, name: "Dinorado", stock: "50 sacks", price: 720 },

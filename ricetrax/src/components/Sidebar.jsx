@@ -6,7 +6,8 @@ import {
   FaExclamationTriangle,
   FaBars,
   FaTimes,
-  FaCog
+  FaCog,
+  FaTruck
 } from "react-icons/fa";
 import "../styles/sidebar.css";
 import Logo from '../assets/Logo.png'
@@ -52,12 +53,20 @@ const Sidebar = () => {
             Notifications
           </a>
         </li>
+         <li>
+          <a href="/supplier">
+            <FaTruck className="icon" />
+            Supplier
+          </a>
+        </li>
         <li>
-  <a href="/settings">
-    <FaCog className="icon" />
-    Settings
-  </a>
-</li>
+          <a href="/settings">
+            <FaCog className="icon" />
+            Settings
+          </a>
+        </li>
+
+       
       </ul>
     </aside>
   );

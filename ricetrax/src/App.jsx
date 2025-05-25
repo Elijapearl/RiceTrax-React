@@ -9,6 +9,8 @@ import Inventory from './pages/Inventory';
 import BrandDetails from "./pages/BrandDetails";
 import SalesScreen from './pages/SalesScreen';
 import NotificationsTab from './pages/NotificationsTab';
+import SettingsPage from './pages/SettingsPage';
+import Supplier from './pages/SupplierPage'
 
 const App = () => (
   <Router>
@@ -21,6 +23,8 @@ const App = () => (
       <Route path="/inventory/:brandId" element={<BrandDetails />} />
       <Route path="/sales" element={<SalesScreen />} />
       <Route path="/alerts" element={<NotificationsTab />} />
+      <Route path="/settings" element={<SettingsPage />} />
+      <Route path="/supplier" element={<Supplier />} />
     </Routes>
   </Router>
 );

@@ -1,0 +1,211 @@
+/* Basic layout and fonts */
+.settings-page {
+  display: flex;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  width: 100vw;
+  background-color: #f9f9f9;
+}
+
+.settings-container {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  max-width: calc(100% - 240px);
+  margin-left: 240px;
+  box-sizing: border-box;
+  transition: margin-left 0.3s ease, max-width 0.3s ease;
+}
+
+.settings-header2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #228a09;
+}
+
+/* === Tabs === */
+.settings-tabs {
+  margin-bottom: 2rem;
+}
+
+/* Desktop tab buttons */
+.tab-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.tab-buttons button {
+  padding: 0.6rem 1.2rem;
+  border: 1.5px solid #4caf50;
+  background-color: white;
+  color: #4caf50;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab-buttons button.active,
+.tab-buttons button:hover {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* === Custom Dropdown for Mobile === */
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+  max-width: 92vw;
+  margin-bottom: 1rem;
+  font-family: inherit;
+}
+
+.dropdown-toggle {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.arrow {
+  margin-left: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  z-index: 1000;
+  max-height: 240px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu li:hover,
+.dropdown-menu li.active {
+  background-color: #e0f9ea;
+  font-weight: 600;
+}
+
+/* === Tab content === */
+
+.settings-content {
+  background-color: white;
+  padding: 2em 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
+  width: 50%;
+}
+
+.settings-content h3 {
+  margin-top: 0;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.settings-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.settings-form input[type="text"],
+.settings-form input[type="email"],
+.settings-form input[type="tel"],
+.settings-form input[type="password"],
+.settings-form select {
+  width: 100%;
+  padding: 0.45rem 0.7rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.settings-form input[type="text"]:focus,
+.settings-form input[type="email"]:focus,
+.settings-form input[type="tel"]:focus,
+.settings-form input[type="password"]:focus,
+.settings-form select:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.settings-form label input[type="checkbox"] {
+  margin-right: 0.6rem;
+}
+
+.save-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.save-button:hover {
+  background-color: #388e3c;
+}
+
+/* === Responsive: Desktop vs Mobile Tabs visibility === */
+
+/* Desktop: show tab buttons, hide dropdown */
+@media (min-width: 769px) {
+  .tab-buttons {
+    display: flex;
+  }
+  .tab-dropdown {
+    display: none;
+  }
+
+
+}
+
+/* Mobile: hide tab buttons, show dropdown */
+@media (max-width: 768px) {
+  .tab-buttons {
+    display: none;
+  }
+  .tab-dropdown {
+    display: block;
+  }
+  .settings-container{
+    margin-top: 80px;
+    margin-left: 0px;
+      max-width: 100%;
+  }
+
+  .settings-content {
+    width: 100%;
+    padding: 1.5rem;
+  }
+}
